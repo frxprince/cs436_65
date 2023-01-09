@@ -15,14 +15,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        var byteValue:Double
         var btn_inputprefix =findViewById<Button>(R.id.button_inputprefix)
         var textinput=findViewById<EditText>(R.id.editTextNumberDecimal)
         var textoutput=findViewById<TextView>(R.id.textView2)
+        var btn_convert=findViewById<Button>(R.id.button_convert)
         var InputPrefixResult=registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()){
         result:ActivityResult->if (result.resultCode == RESULT_OK){
         //    textoutput.text=result.data?.getStringExtra("prefix")?:"error"
-var byteValue=when(result.data!!.getStringExtra("prefix")){
+    byteValue=when(result.data!!.getStringExtra("prefix")){
     "kB"->textinput.text.toString().toDouble()* Math.pow(10.0,3.0)
     "GB"->textinput.text.toString().toDouble()* Math.pow(10.0,9.0)
     "MB"->textinput.text.toString().toDouble()* Math.pow(10.0,6.0)
@@ -38,6 +40,9 @@ var byteValue=when(result.data!!.getStringExtra("prefix")){
            var i = Intent(this,InputPrefix::class.java)
           InputPrefixResult.launch(i)        //startActivity(i)
        }
-
+        btn_convert.setOnClickListener {
+            var i = Intent(this,TargetPrefix::class.java)
+            startActivity(i)
+        }
     }
 }
