@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -13,8 +14,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import java.text.DecimalFormat
 
 class MainActivity : AppCompatActivity() {
+    override fun finish() {
+        super.finish()
+     //   overridePendingTransition(R.anim.slide_down,R.anim.slide_down)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+      //  overridePendingTransition(R.anim.slide_down,R.anim.slide_down)
         setContentView(R.layout.activity_main)
         var byteValue:Double=0.0
         var btn_inputprefix =findViewById<Button>(R.id.button_inputprefix)
@@ -32,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     "TB"->textinput.text.toString().toDouble()* Math.pow(10.0,12.0)
     else->0.0}
             textoutput.text=DecimalFormat("#,###,###").format(byteValue)
+    btn_convert.startAnimation(AnimationUtils.loadAnimation(this,R.anim.blink))
         }else{
             textoutput.text="no selection"
         }
@@ -62,4 +69,5 @@ class MainActivity : AppCompatActivity() {
          TargetPrefixResult.launch(i)
         }
     }
+
 }
