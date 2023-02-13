@@ -42,7 +42,8 @@ ActivityCompat.requestPermissions(this,
              android.Manifest.permission.WRITE_EXTERNAL_STORAGE),1234)
 }
 btn_write_sdcard.setOnClickListener {
-    var file= File(Environment.getExternalStorageDirectory().toString()+
+    var file= File(Environment.getExternalStoragePublicDirectory(
+        Environment.DIRECTORY_DOWNLOADS).toString()+
             "/"+txt_filename.text.toString())
     file.createNewFile()
     var outputfile=FileOutputStream(file)
