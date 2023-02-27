@@ -13,8 +13,8 @@ class MySMSReceiver : BroadcastReceiver() {
    var message= Telephony.Sms.Intents.getMessagesFromIntent(intent)[0]
         Log.v("my program",message.displayMessageBody)
    var i=Intent(context,MainActivity::class.java)
-       i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-       i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+       i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+       i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
        if (message.displayMessageBody=="meaw"){
            i.putExtra("data","meaw")
            context.startActivity(i)
